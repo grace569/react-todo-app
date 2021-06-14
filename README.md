@@ -1,6 +1,6 @@
 # Getting Started 
 
-This is a mini to-do list app
+This is a mini to-do list app implemented in React and Redux. The time spend on this project is ~1 day. 
 
 ## Available Scripts
 
