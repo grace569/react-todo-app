@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ToDoListItem from './ToDoListItem';
 import './ToDoList.css'
 import ToDoListHeader from "./ToDoListHeader";
+import {addItem} from "./app/action/addItem";
 
 class TodoList extends Component {
     constructor(props) {
@@ -9,7 +10,7 @@ class TodoList extends Component {
         this.state = {
             items: [],
         };
-        this.addItem = this.addItem.bind(this);
+        this.addSumbit = this.addSumbit.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
     }
     componentDidMount() {
@@ -41,7 +42,7 @@ class TodoList extends Component {
                 }
             )
     }
-    addItem(item){
+    addSumbit(item){
         if (this._inputElement.value !== '') {
             const newItem = {
                 text: this._inputElement.value,
@@ -80,7 +81,7 @@ class TodoList extends Component {
                 <div className="todoListMain">
                     <ToDoListHeader/>
                     <div className="header">
-                        <form onSubmit={this.addItem}>
+                        <form onSubmit={this.addSumbit}>
                             <input ref={(a) => this._inputElement = a}
                                    placeholder="enter task">
                             </input>
@@ -93,5 +94,8 @@ class TodoList extends Component {
         }
     }
 }
+const mapDispatchToProps = dispatch => ({
+    addItem: item => dispatch(addItem(item))
+})
 
 export default TodoList;
