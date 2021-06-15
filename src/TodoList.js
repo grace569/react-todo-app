@@ -3,6 +3,7 @@ import ToDoListItem from './ToDoListItem';
 import './ToDoList.css'
 import ToDoListHeader from "./ToDoListHeader";
 import {addItem} from "./app/action/addItem";
+import {connect} from "react-redux";
 
 class TodoList extends Component {
     constructor(props) {
@@ -10,7 +11,7 @@ class TodoList extends Component {
         this.state = {
             items: [],
         };
-        this.addSumbit = this.addSumbit.bind(this);
+        this.addSubmit = this.addSubmit.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
     }
     componentDidMount() {
@@ -42,7 +43,7 @@ class TodoList extends Component {
                 }
             )
     }
-    addSumbit(item){
+    addSubmit(item){
         if (this._inputElement.value !== '') {
             const newItem = {
                 text: this._inputElement.value,
@@ -81,7 +82,7 @@ class TodoList extends Component {
                 <div className="todoListMain">
                     <ToDoListHeader/>
                     <div className="header">
-                        <form onSubmit={this.addSumbit}>
+                        <form onSubmit={this.addSubmit}>
                             <input ref={(a) => this._inputElement = a}
                                    placeholder="enter task">
                             </input>
@@ -98,4 +99,6 @@ const mapDispatchToProps = dispatch => ({
     addItem: item => dispatch(addItem(item))
 })
 
-export default TodoList;
+export default connect(
+    mapDispatchToProps
+) (TodoList);
